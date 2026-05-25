@@ -5,8 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1"/>
   <meta name="theme-color" content="#FF2D6B"/>
   <meta name="apple-mobile-web-app-capable" content="yes"/>
-  <meta name="apple-mobile-web-app-title" content="Amore Pact"/>
-  <title>Amore Pact 💪</title>
+  <meta name="apple-mobile-web-app-title" content="Let's Get Healthy"/>
+  <title>Let's Get Healthy 💪</title>
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet"/>
   <style>
     :root{
@@ -17,38 +17,23 @@
     *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
     body{background:#FEF0F5;color:#2D0A1A;font-family:'DM Sans',sans-serif;min-height:100vh;overflow-x:hidden}
     h1,h2,.display{font-family:'Bebas Neue',sans-serif;letter-spacing:2px}
-
-    /* Animated grain overlay */
     body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");pointer-events:none;z-index:999;opacity:0.4}
-
     @keyframes floatUp{0%{transform:translateY(0) scale(1) rotate(0deg);opacity:1}100%{transform:translateY(-260px) scale(1.4) rotate(20deg);opacity:0}}
     @keyframes popIn{from{opacity:0;transform:scale(0.88) translateY(20px)}to{opacity:1;transform:scale(1) translateY(0)}}
     @keyframes slideUp{from{opacity:0;transform:translateY(100%)}to{opacity:1;transform:translateY(0)}}
     @keyframes spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
     @keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.06)}}
-    @keyframes shimmer{0%{background-position:-200% center}100%{background-position:200% center}}
     @keyframes counterUp{from{transform:translateY(10px);opacity:0}to{transform:translateY(0);opacity:1}}
-    @keyframes barFill{from{width:0}to{width:var(--target-w)}}
-    @keyframes glow{0%,100%{box-shadow:0 0 20px rgba(255,45,107,0.4)}50%{box-shadow:0 0 40px rgba(255,45,107,0.8)}}
-
     .fire-btn{position:relative;overflow:hidden;border:none;cursor:pointer;font-family:'Bebas Neue',sans-serif;letter-spacing:2px;transition:transform 0.15s,box-shadow 0.15s}
     .fire-btn:active{transform:scale(0.96)}
     .fire-btn::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,255,255,0.15),transparent);pointer-events:none}
-
-    .tab-btn{padding:8px 16px;border-radius:30px;cursor:pointer;font-family:'DM Sans',sans-serif;font-weight:600;font-size:12px;transition:all 0.2s;border:none;text-transform:uppercase;letter-spacing:1px}
+    .tab-btn{padding:8px 14px;border-radius:30px;cursor:pointer;font-family:'DM Sans',sans-serif;font-weight:600;font-size:11px;transition:all 0.2s;border:none;text-transform:uppercase;letter-spacing:1px;white-space:nowrap}
     .tab-btn.active{background:var(--hot);color:#fff;box-shadow:0 4px 20px rgba(255,45,107,0.5)}
     .tab-btn.inactive{background:var(--surface);color:var(--muted)}
-
     .card{background:var(--card);border-radius:20px;border:1px solid rgba(255,45,107,0.25);overflow:hidden}
-
     .type-pill{flex:1;padding:14px 0;border-radius:16px;cursor:pointer;font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:2px;transition:all 0.2s;border:2px solid var(--surface);background:var(--surface);color:var(--muted);text-align:center}
     .type-pill.active-class{background:var(--class);border-color:var(--class);color:#fff;box-shadow:0 4px 20px rgba(255,45,107,0.5)}
     .type-pill.active-gym{background:var(--gym);border-color:var(--gym);color:#fff;box-shadow:0 4px 20px rgba(255,140,0,0.5)}
-
-    .session-tag{display:inline-flex;align-items:center;gap:5px;padding:6px 10px;border-radius:10px;font-size:12px;font-weight:600;margin-bottom:6px;animation:counterUp 0.3s ease}
-
-    /* SVG workout figures */
-    .figure{opacity:0.06;position:absolute;pointer-events:none}
   </style>
 </head>
 <body>
@@ -56,9 +41,9 @@
 <div id="floaties" style="position:fixed;inset:0;pointer-events:none;z-index:200;overflow:hidden"></div>
 
 <!-- BURST -->
-<div id="burst-overlay" style="display:none;position:fixed;inset:0;z-index:300;flex-direction:column;align-items:center;justify-content:center;background:rgba(254,240,245,0.97);text-align:center;padding:32px;animation:popIn 0.3s ease;color:#2D0A1A">
+<div id="burst-overlay" style="display:none;position:fixed;inset:0;z-index:300;flex-direction:column;align-items:center;justify-content:center;background:rgba(254,240,245,0.97);text-align:center;padding:32px;color:#2D0A1A">
   <div id="burst-big" style="font-size:90px;animation:pulse 0.6s ease infinite"></div>
-  <div id="burst-headline" style="font-family:'Bebas Neue',sans-serif;font-size:48px;letter-spacing:3px;margin-top:16px;line-height:1"></div>
+  <div id="burst-headline" style="font-family:'Bebas Neue',sans-serif;font-size:44px;letter-spacing:3px;margin-top:16px;line-height:1"></div>
   <div id="burst-sub" style="color:var(--muted);font-size:14px;margin-top:10px;font-style:italic"></div>
   <div id="burst-count-label" style="margin-top:20px;background:var(--surface);border-radius:30px;padding:10px 24px;font-size:13px;font-weight:600;color:#2D0A1A"></div>
 </div>
@@ -84,40 +69,23 @@
 <!-- LOADING -->
 <div id="loading" style="min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;background:#FEF0F5">
   <div style="font-size:48px;animation:spin 1s linear infinite">🌸</div>
-  <div style="font-family:'Bebas Neue',sans-serif;font-size:28px;letter-spacing:3px;color:var(--hot)">LOADING YOUR PACT</div>
+  <div style="font-family:'Bebas Neue',sans-serif;font-size:28px;letter-spacing:3px;color:var(--hot)">LOADING...</div>
 </div>
 
 <!-- APP -->
 <div id="app" style="display:none;min-height:100vh;padding-bottom:60px;position:relative">
 
-  <!-- Decorative SVG figures -->
-  <svg class="figure" style="top:60px;right:-20px;width:180px" viewBox="0 0 100 200" fill="#2D0A1A">
-    <circle cx="50" cy="20" r="12"/>
-    <line x1="50" y1="32" x2="50" y2="100" stroke="#2D0A1A" stroke-width="6" stroke-linecap="round"/>
-    <line x1="50" y1="55" x2="20" y2="80" stroke="#2D0A1A" stroke-width="5" stroke-linecap="round"/>
-    <line x1="50" y1="55" x2="80" y2="40" stroke="#2D0A1A" stroke-width="5" stroke-linecap="round"/>
-    <line x1="50" y1="100" x2="25" y2="145" stroke="#2D0A1A" stroke-width="5" stroke-linecap="round"/>
-    <line x1="50" y1="100" x2="72" y2="148" stroke="#2D0A1A" stroke-width="5" stroke-linecap="round"/>
-  </svg>
-  <svg class="figure" style="bottom:200px;left:-10px;width:140px;transform:scaleX(-1)" viewBox="0 0 100 200" fill="none">
-    <circle cx="50" cy="18" r="12" stroke="#2D0A1A" stroke-width="4"/>
-    <path d="M50 30 Q30 60 20 90" stroke="#2D0A1A" stroke-width="5" stroke-linecap="round" fill="none"/>
-    <path d="M50 30 Q70 50 85 40" stroke="#2D0A1A" stroke-width="5" stroke-linecap="round" fill="none"/>
-    <path d="M20 90 Q15 130 10 160" stroke="#2D0A1A" stroke-width="5" stroke-linecap="round" fill="none"/>
-    <path d="M20 90 Q40 125 45 165" stroke="#2D0A1A" stroke-width="5" stroke-linecap="round" fill="none"/>
-  </svg>
-
-  <!-- HEADER HERO -->
-  <div style="position:relative;padding:48px 24px 28px;background:linear-gradient(180deg,rgba(255,45,107,0.1) 0%,transparent 100%);border-bottom:1px solid rgba(255,45,107,0.1)">
+  <!-- HEADER -->
+  <div style="position:relative;padding:48px 24px 24px;background:linear-gradient(180deg,rgba(255,45,107,0.1) 0%,transparent 100%);border-bottom:1px solid rgba(255,45,107,0.1)">
     <div style="display:flex;align-items:flex-start;justify-content:space-between">
       <div>
-        <div style="font-size:11px;letter-spacing:4px;color:var(--hot);text-transform:uppercase;font-weight:600;margin-bottom:4px">Amore Fitness</div>
-        <h1 style="font-size:40px;line-height:0.95;color:var(--hot)">ACCOUNTABILITY<br/>TRACKER</h1>
+        <div style="font-size:11px;letter-spacing:4px;color:var(--hot);text-transform:uppercase;font-weight:600;margin-bottom:4px">fitness tracker</div>
+        <h1 style="font-size:42px;line-height:0.95;color:var(--hot)">LET'S GET<br/>HEALTHY</h1>
         <div style="font-size:13px;color:var(--muted);margin-top:8px;font-style:italic" id="motivation-text"></div>
       </div>
       <div style="text-align:right">
-        <div style="font-size:32px">🌸🌷</div>
-        <div style="font-size:11px;color:var(--muted);margin-top:4px;font-weight:600">RENA × WANJUN</div>
+        <div style="font-size:28px">🌸🌷🦋</div>
+        <div style="font-size:10px;color:var(--muted);margin-top:4px;font-weight:600">RENA · WANJUN · ZHENLING</div>
         <div style="display:flex;align-items:center;gap:4px;justify-content:flex-end;margin-top:6px">
           <div id="sync-dot" style="width:6px;height:6px;border-radius:50%;background:#ff4444"></div>
           <span id="sync-label" style="font-size:10px;color:var(--muted)">connecting</span>
@@ -126,85 +94,68 @@
     </div>
   </div>
 
-  <!-- MONTHLY POWER COUNTERS -->
+  <!-- MONTHLY COUNTERS -->
   <div style="padding:20px 20px 0;position:relative;z-index:1">
     <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px">
       <div style="font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:2px;color:var(--hot)" id="month-label"></div>
       <div style="font-size:11px;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:1px">Monthly Progress</div>
     </div>
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:8px">
 
-      <!-- Rena monthly -->
-      <div class="card" style="padding:20px;position:relative;overflow:hidden">
-        <div style="position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--hot),var(--hot2))"></div>
-        <div style="display:flex;align-items:center;gap:8px;margin-bottom:16px">
-          <span style="font-size:22px">🌸</span>
-          <span style="font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:1px">RENA</span>
+    <!-- 3 column grid -->
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:8px">
+      <!-- Rena -->
+      <div class="card" style="padding:14px;position:relative;overflow:hidden">
+        <div style="position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,#FF2D6B,#FF6B9D)"></div>
+        <div style="text-align:center;margin-bottom:10px">
+          <div style="font-size:24px">🌸</div>
+          <div style="font-family:'Bebas Neue',sans-serif;font-size:16px;letter-spacing:1px">RENA</div>
         </div>
-        <div id="monthly-count-rena" style="font-family:'Bebas Neue',sans-serif;font-size:64px;line-height:1;color:var(--hot);animation:counterUp 0.4s ease">0</div>
-        <div style="font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:2px;margin-bottom:12px">sessions</div>
-        <div style="display:flex;flex-direction:column;gap:6px">
-          <div style="display:flex;align-items:center;justify-content:space-between">
-            <span style="font-size:11px;color:var(--muted)">🧘‍♀️ classes</span>
-            <span id="class-count-rena" style="font-family:'Bebas Neue',sans-serif;font-size:18px;color:var(--class)">0</span>
-          </div>
-          <div style="height:4px;background:var(--surface);border-radius:4px;overflow:hidden">
-            <div id="class-bar-rena" style="height:100%;background:var(--class);border-radius:4px;width:0%;transition:width 0.6s ease"></div>
-          </div>
-          <div style="display:flex;align-items:center;justify-content:space-between">
-            <span style="font-size:11px;color:var(--muted)">💪 gym</span>
-            <span id="gym-count-rena" style="font-family:'Bebas Neue',sans-serif;font-size:18px;color:var(--gym)">0</span>
-          </div>
-          <div style="height:4px;background:var(--surface);border-radius:4px;overflow:hidden">
-            <div id="gym-bar-rena" style="height:100%;background:var(--gym);border-radius:4px;width:0%;transition:width 0.6s ease"></div>
-          </div>
+        <div id="monthly-count-rena" style="font-family:'Bebas Neue',sans-serif;font-size:48px;line-height:1;color:#FF2D6B;text-align:center;animation:counterUp 0.4s ease">0</div>
+        <div style="font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:1px;text-align:center;margin-bottom:10px">sessions</div>
+        <div style="font-size:10px;color:var(--muted);display:flex;justify-content:space-between"><span>🧘‍♀️ <span id="class-count-rena">0</span></span><span>💪 <span id="gym-count-rena">0</span></span></div>
+        <div style="height:3px;background:var(--surface);border-radius:3px;overflow:hidden;margin-top:4px">
+          <div id="class-bar-rena" style="height:100%;background:#FF2D6B;border-radius:3px;width:0%;transition:width 0.6s ease"></div>
         </div>
       </div>
-
-      <!-- Wanjun monthly -->
-      <div class="card" style="padding:20px;position:relative;overflow:hidden">
+      <!-- Wanjun -->
+      <div class="card" style="padding:14px;position:relative;overflow:hidden">
         <div style="position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,#C2619F,#DBA8D8)"></div>
-        <div style="display:flex;align-items:center;gap:8px;margin-bottom:16px">
-          <span style="font-size:22px">🌷</span>
-          <span style="font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:1px">WANJUN</span>
+        <div style="text-align:center;margin-bottom:10px">
+          <div style="font-size:24px">🌷</div>
+          <div style="font-family:'Bebas Neue',sans-serif;font-size:16px;letter-spacing:1px">WANJUN</div>
         </div>
-        <div id="monthly-count-wanjun" style="font-family:'Bebas Neue',sans-serif;font-size:64px;line-height:1;color:#C2619F;animation:counterUp 0.4s ease">0</div>
-        <div style="font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:2px;margin-bottom:12px">sessions</div>
-        <div style="display:flex;flex-direction:column;gap:6px">
-          <div style="display:flex;align-items:center;justify-content:space-between">
-            <span style="font-size:11px;color:var(--muted)">🧘‍♀️ classes</span>
-            <span id="class-count-wanjun" style="font-family:'Bebas Neue',sans-serif;font-size:18px;color:var(--class)">0</span>
-          </div>
-          <div style="height:4px;background:var(--surface);border-radius:4px;overflow:hidden">
-            <div id="class-bar-wanjun" style="height:100%;background:var(--class);border-radius:4px;width:0%;transition:width 0.6s ease"></div>
-          </div>
-          <div style="display:flex;align-items:center;justify-content:space-between">
-            <span style="font-size:11px;color:var(--muted)">💪 gym</span>
-            <span id="gym-count-wanjun" style="font-family:'Bebas Neue',sans-serif;font-size:18px;color:var(--gym)">0</span>
-          </div>
-          <div style="height:4px;background:var(--surface);border-radius:4px;overflow:hidden">
-            <div id="gym-bar-wanjun" style="height:100%;background:var(--gym);border-radius:4px;width:0%;transition:width 0.6s ease"></div>
-          </div>
+        <div id="monthly-count-wanjun" style="font-family:'Bebas Neue',sans-serif;font-size:48px;line-height:1;color:#C2619F;text-align:center;animation:counterUp 0.4s ease">0</div>
+        <div style="font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:1px;text-align:center;margin-bottom:10px">sessions</div>
+        <div style="font-size:10px;color:var(--muted);display:flex;justify-content:space-between"><span>🧘‍♀️ <span id="class-count-wanjun">0</span></span><span>💪 <span id="gym-count-wanjun">0</span></span></div>
+        <div style="height:3px;background:var(--surface);border-radius:3px;overflow:hidden;margin-top:4px">
+          <div id="class-bar-wanjun" style="height:100%;background:#C2619F;border-radius:3px;width:0%;transition:width 0.6s ease"></div>
+        </div>
+      </div>
+      <!-- Zhenling -->
+      <div class="card" style="padding:14px;position:relative;overflow:hidden">
+        <div style="position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,#7B5EA7,#B39DDB)"></div>
+        <div style="text-align:center;margin-bottom:10px">
+          <div style="font-size:24px">🦋</div>
+          <div style="font-family:'Bebas Neue',sans-serif;font-size:16px;letter-spacing:1px">ZHENLING</div>
+        </div>
+        <div id="monthly-count-zhenling" style="font-family:'Bebas Neue',sans-serif;font-size:48px;line-height:1;color:#7B5EA7;text-align:center;animation:counterUp 0.4s ease">0</div>
+        <div style="font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:1px;text-align:center;margin-bottom:10px">sessions</div>
+        <div style="font-size:10px;color:var(--muted);display:flex;justify-content:space-between"><span>🧘‍♀️ <span id="class-count-zhenling">0</span></span><span>💪 <span id="gym-count-zhenling">0</span></span></div>
+        <div style="height:3px;background:var(--surface);border-radius:3px;overflow:hidden;margin-top:4px">
+          <div id="class-bar-zhenling" style="height:100%;background:#7B5EA7;border-radius:3px;width:0%;transition:width 0.6s ease"></div>
         </div>
       </div>
     </div>
 
-    <!-- VS bar -->
+    <!-- Leaderboard -->
     <div class="card" style="padding:14px 18px;margin-bottom:20px">
-      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
-        <span style="font-size:12px;font-weight:600;color:var(--hot)">RENA</span>
-        <span style="font-size:10px;color:var(--muted);font-weight:600;letter-spacing:2px">THIS MONTH</span>
-        <span style="font-size:12px;font-weight:600;color:#C2619F">WANJUN</span>
-      </div>
-      <div style="height:8px;background:var(--surface);border-radius:8px;overflow:hidden;display:flex">
-        <div id="vs-rena" style="height:100%;background:linear-gradient(90deg,var(--hot),var(--hot2));transition:width 0.6s ease;width:50%"></div>
-        <div id="vs-wanjun" style="height:100%;background:linear-gradient(90deg,#DBA8D8,#C2619F);transition:width 0.6s ease;width:50%"></div>
-      </div>
+      <div style="font-family:'Bebas Neue',sans-serif;font-size:16px;letter-spacing:2px;color:var(--hot);margin-bottom:12px">🏆 THIS MONTH'S LEADERBOARD</div>
+      <div id="leaderboard"></div>
     </div>
   </div>
 
   <!-- TABS -->
-  <div style="display:flex;gap:8px;padding:0 20px;margin-bottom:16px;position:relative;z-index:1;overflow-x:auto;padding-bottom:4px">
+  <div style="display:flex;gap:6px;padding:0 20px;margin-bottom:16px;position:relative;z-index:1;overflow-x:auto;padding-bottom:4px">
     <button class="tab-btn active" id="tab-today" onclick="setTab('today')">⚡ TODAY</button>
     <button class="tab-btn inactive" id="tab-week" onclick="setTab('week')">📅 WEEK</button>
     <button class="tab-btn inactive" id="tab-year" onclick="setTab('year')">🗓️ YEAR</button>
@@ -213,34 +164,42 @@
 
   <!-- TODAY TAB -->
   <div id="view-today" style="padding:0 20px;position:relative;z-index:1">
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
-
-      <div class="card" style="padding:20px;position:relative">
-        <div style="position:absolute;top:-1px;left:20px;right:20px;height:2px;background:linear-gradient(90deg,var(--hot),transparent);border-radius:2px"></div>
-        <div style="text-align:center;margin-bottom:16px">
-          <div style="font-size:42px">🌸</div>
-          <div style="font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:2px;margin-top:4px">RENA</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px">
+      <!-- Rena -->
+      <div class="card" style="padding:16px;position:relative">
+        <div style="position:absolute;top:-1px;left:12px;right:12px;height:2px;background:linear-gradient(90deg,#FF2D6B,transparent);border-radius:2px"></div>
+        <div style="text-align:center;margin-bottom:12px">
+          <div style="font-size:32px">🌸</div>
+          <div style="font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:1px">RENA</div>
         </div>
-        <div id="today-checkins-rena" style="margin-bottom:14px;min-height:24px"></div>
-        <button onclick="openModal('rena')" class="fire-btn" style="width:100%;padding:14px 0;border-radius:14px;background:linear-gradient(135deg,var(--hot),var(--hot2));color:#fff;font-size:16px;box-shadow:0 4px 20px rgba(255,45,107,0.4)">+ LOG 🔥</button>
+        <div id="today-checkins-rena" style="margin-bottom:12px;min-height:20px"></div>
+        <button onclick="openModal('rena')" class="fire-btn" style="width:100%;padding:12px 0;border-radius:12px;background:linear-gradient(135deg,#FF2D6B,#FF6B9D);color:#fff;font-size:14px;box-shadow:0 4px 16px rgba(255,45,107,0.4)">+ LOG 🔥</button>
       </div>
-
-      <div class="card" style="padding:20px;position:relative">
-        <div style="position:absolute;top:-1px;left:20px;right:20px;height:2px;background:linear-gradient(90deg,#C2619F,transparent);border-radius:2px"></div>
-        <div style="text-align:center;margin-bottom:16px">
-          <div style="font-size:42px">🌷</div>
-          <div style="font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:2px;margin-top:4px">WANJUN</div>
+      <!-- Wanjun -->
+      <div class="card" style="padding:16px;position:relative">
+        <div style="position:absolute;top:-1px;left:12px;right:12px;height:2px;background:linear-gradient(90deg,#C2619F,transparent);border-radius:2px"></div>
+        <div style="text-align:center;margin-bottom:12px">
+          <div style="font-size:32px">🌷</div>
+          <div style="font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:1px">WANJUN</div>
         </div>
-        <div id="today-checkins-wanjun" style="margin-bottom:14px;min-height:24px"></div>
-        <button onclick="openModal('wanjun')" class="fire-btn" style="width:100%;padding:14px 0;border-radius:14px;background:linear-gradient(135deg,#C2619F,#DBA8D8);color:#fff;font-size:16px;box-shadow:0 4px 20px rgba(194,97,159,0.4)">+ LOG 🔥</button>
+        <div id="today-checkins-wanjun" style="margin-bottom:12px;min-height:20px"></div>
+        <button onclick="openModal('wanjun')" class="fire-btn" style="width:100%;padding:12px 0;border-radius:12px;background:linear-gradient(135deg,#C2619F,#DBA8D8);color:#fff;font-size:14px;box-shadow:0 4px 16px rgba(194,97,159,0.4)">+ LOG 🔥</button>
+      </div>
+      <!-- Zhenling -->
+      <div class="card" style="padding:16px;position:relative">
+        <div style="position:absolute;top:-1px;left:12px;right:12px;height:2px;background:linear-gradient(90deg,#7B5EA7,transparent);border-radius:2px"></div>
+        <div style="text-align:center;margin-bottom:12px">
+          <div style="font-size:32px">🦋</div>
+          <div style="font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:1px">ZHENLING</div>
+        </div>
+        <div id="today-checkins-zhenling" style="margin-bottom:12px;min-height:20px"></div>
+        <button onclick="openModal('zhenling')" class="fire-btn" style="width:100%;padding:12px 0;border-radius:12px;background:linear-gradient(135deg,#7B5EA7,#B39DDB);color:#fff;font-size:14px;box-shadow:0 4px 16px rgba(123,94,167,0.4)">+ LOG 🔥</button>
       </div>
     </div>
-
-    <!-- Today's energy bar -->
-    <div id="both-fire" style="display:none;margin-top:14px" class="card">
-      <div style="padding:16px;text-align:center;background:linear-gradient(135deg,rgba(255,45,107,0.12),rgba(255,140,0,0.12))">
-        <div style="font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:3px;color:var(--hot)">🔥 BOTH SHOWED UP TODAY 🔥</div>
-        <div style="font-size:13px;color:var(--muted);margin-top:4px;font-style:italic">the pact is unbreakable 💪</div>
+    <div id="all-fire" style="display:none;margin-top:14px" class="card">
+      <div style="padding:16px;text-align:center;background:linear-gradient(135deg,rgba(255,45,107,0.1),rgba(255,140,0,0.1))">
+        <div style="font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:3px;color:var(--hot)">🔥 ALL THREE SHOWED UP TODAY 🔥</div>
+        <div style="font-size:13px;color:var(--muted);margin-top:4px;font-style:italic">unstoppable trio 💪</div>
       </div>
     </div>
   </div>
@@ -248,14 +207,15 @@
   <!-- WEEK TAB -->
   <div id="view-week" style="display:none;padding:0 20px;position:relative;z-index:1">
     <div id="week-rena" class="card" style="padding:18px;margin-bottom:12px"></div>
-    <div id="week-wanjun" class="card" style="padding:18px"></div>
+    <div id="week-wanjun" class="card" style="padding:18px;margin-bottom:12px"></div>
+    <div id="week-zhenling" class="card" style="padding:18px"></div>
   </div>
 
   <!-- YEAR TAB -->
   <div id="view-year" style="display:none;padding:0 20px;position:relative;z-index:1">
     <div id="year-rena" class="card" style="padding:18px;margin-bottom:12px"></div>
     <div id="year-wanjun" class="card" style="padding:18px;margin-bottom:12px"></div>
-    <!-- Monthly breakdown -->
+    <div id="year-zhenling" class="card" style="padding:18px;margin-bottom:12px"></div>
     <div class="card" style="padding:18px;margin-bottom:12px">
       <div style="font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:2px;color:var(--hot);margin-bottom:14px">📊 MONTHLY BREAKDOWN</div>
       <div id="monthly-breakdown"></div>
@@ -274,20 +234,26 @@ const SB_URL="https://nhgalxthqquiacclouep.supabase.co";
 const SB_KEY="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5oZ2FseHRocXF1aWFjY2xvdWVwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzY5OTM4MDAsImV4cCI6MjA5MjU2OTgwMH0.Zjzy3Yo2eRy2A66vwT2X-fEp1y1DlAGI8SwaCdwqNiA";
 const HDR={"Content-Type":"application/json",apikey:SB_KEY,Authorization:`Bearer ${SB_KEY}`};
 
+const USERS={
+  rena:    {name:"RENA",    emoji:"🌸",color:"#FF2D6B",accent:"#FF6B9D",light:"#FFE0ED"},
+  wanjun:  {name:"WANJUN",  emoji:"🌷",color:"#C2619F",accent:"#DBA8D8",light:"#F5E0F5"},
+  zhenling:{name:"ZHENLING",emoji:"🦋",color:"#7B5EA7",accent:"#B39DDB",light:"#EDE7F6"},
+};
+
 const MOTIVATIONS=[
   "no one who ever worked out ever regretted it 🔥",
   "she's not lucky. she's disciplined. 💅",
   "your body is capable of more than your mind thinks",
   "sweat now. glow forever. ✨",
-  "the gym is your runway babe 👑",
   "strong is the new everything 💪",
   "earn it. own it. repeat. 🔥",
   "one more rep. one more class. one more day ahead. 🌸",
+  "three girls, one goal — let's get healthy! 🦋",
 ];
 
 const MONTH_NAMES=["January","February","March","April","May","June","July","August","September","October","November","December"];
 const DAY_LABELS=["SUN","MON","TUE","WED","THU","FRI","SAT"];
-const SPARKS=["🔥","⚡","💥","✨","💪","🏋️‍♀️","🌟","💫"];
+const SPARKS=["🔥","⚡","💥","✨","💪","🌟","💫","🦋"];
 
 let checkins=[];
 let activeUser=null;
@@ -301,7 +267,7 @@ async function loadCheckins(){
   try{
     const r=await fetch(`${SB_URL}/rest/v1/checkins?select=id,user_key,day,type,checked_at&order=checked_at.desc`,{headers:HDR});
     checkins=await r.json();
-    document.getElementById("sync-dot").style.cssText="width:6px;height:6px;border-radius:50%;background:#00ff88;box-shadow:0 0 8px #00ff88";
+    document.getElementById("sync-dot").style.cssText="width:6px;height:6px;border-radius:50%;background:#00cc66;box-shadow:0 0 8px #00cc66";
     document.getElementById("sync-label").textContent="live";
   }catch{
     document.getElementById("sync-dot").style.cssText="width:6px;height:6px;border-radius:50%;background:#ff4444";
@@ -329,12 +295,11 @@ function spawnSparks(){
 }
 
 function showBurst(u,type){
-  const names={rena:"RENA",wanjun:"WANJUN"};
-  const colors={rena:"#FF2D6B",wanjun:"#C2619F"};
+  const user=USERS[u];
   const ov=document.getElementById("burst-overlay");
   document.getElementById("burst-big").textContent=type==="class"?"🧘‍♀️":"💪";
-  document.getElementById("burst-headline").textContent=names[u]+" IS ON FIRE";
-  document.getElementById("burst-headline").style.color=colors[u];
+  document.getElementById("burst-headline").textContent=user.name+" IS ON FIRE";
+  document.getElementById("burst-headline").style.color=user.color;
   const month=getMonthPrefix();
   const monthCount=checkins.filter(c=>c.user_key===u&&c.day.startsWith(month)).length;
   document.getElementById("burst-sub").textContent=type==="class"?"class session locked in 🧘‍♀️":"gym session logged 💪";
@@ -346,10 +311,9 @@ function showBurst(u,type){
 function openModal(u){
   activeUser=u;
   selectedType="class";
-  const emojis={rena:"🌸",wanjun:"🌷"};
-  const names={rena:"RENA",wanjun:"WANJUN"};
-  document.getElementById("modal-emoji").textContent=emojis[u];
-  document.getElementById("modal-name").textContent=names[u];
+  const user=USERS[u];
+  document.getElementById("modal-emoji").textContent=user.emoji;
+  document.getElementById("modal-name").textContent=user.name;
   selectType("class");
   document.getElementById("checkin-modal").style.display="flex";
 }
@@ -361,12 +325,10 @@ function selectType(t){
   const gy=document.getElementById("type-gym");
   if(t==="class"){
     cl.className="type-pill active-class";
-    gy.className="type-pill";
-    gy.style.background="var(--surface)";gy.style.color="var(--muted)";gy.style.borderColor="var(--surface)";
+    gy.className="type-pill";gy.style.background="var(--surface)";gy.style.color="var(--muted)";gy.style.borderColor="var(--surface)";
   } else {
     gy.className="type-pill active-gym";
-    cl.className="type-pill";
-    cl.style.background="var(--surface)";cl.style.color="var(--muted)";cl.style.borderColor="var(--surface)";
+    cl.className="type-pill";cl.style.background="var(--surface)";cl.style.color="var(--muted)";cl.style.borderColor="var(--surface)";
   }
 }
 
@@ -396,61 +358,74 @@ function renderAll(){
   const now=new Date();
   document.getElementById("month-label").textContent=MONTH_NAMES[now.getMonth()]+" "+now.getFullYear();
 
-  const renaMonth=checkins.filter(x=>x.user_key==="rena"&&x.day.startsWith(month));
-  const wanjunMonth=checkins.filter(x=>x.user_key==="wanjun"&&x.day.startsWith(month));
-  const renaTotal=renaMonth.length, wanjunTotal=wanjunMonth.length;
-  const grandTotal=renaTotal+wanjunTotal||1;
-
-  // monthly counters
-  ["rena","wanjun"].forEach(u=>{
-    const mList=u==="rena"?renaMonth:wanjunMonth;
-    const total=mList.length;
-    const classC=mList.filter(x=>x.type==="class").length;
-    const gymC=mList.filter(x=>x.type==="gym").length;
-    document.getElementById(`monthly-count-${u}`).textContent=total;
+  const totals={};
+  Object.keys(USERS).forEach(u=>{
+    const m=checkins.filter(x=>x.user_key===u&&x.day.startsWith(month));
+    totals[u]=m.length;
+    const classC=m.filter(x=>x.type==="class").length;
+    const gymC=m.filter(x=>x.type==="gym").length;
+    document.getElementById(`monthly-count-${u}`).textContent=m.length;
     document.getElementById(`class-count-${u}`).textContent=classC;
     document.getElementById(`gym-count-${u}`).textContent=gymC;
     const maxBar=Math.max(classC+gymC,1);
     document.getElementById(`class-bar-${u}`).style.width=`${(classC/maxBar)*100}%`;
-    document.getElementById(`gym-bar-${u}`).style.width=`${(gymC/maxBar)*100}%`;
   });
 
-  // VS bar
-  document.getElementById("vs-rena").style.width=`${(renaTotal/grandTotal)*100}%`;
-  document.getElementById("vs-wanjun").style.width=`${(wanjunTotal/grandTotal)*100}%`;
+  // Leaderboard
+  const medals=["🥇","🥈","🥉"];
+  const rankColors=["#FF8C00","#B06080","#7B5EA7"];
+  const sorted=Object.keys(USERS).map(u=>({u,count:totals[u]})).sort((a,b)=>b.count-a.count);
+  const maxCount=Math.max(...sorted.map(x=>x.count),1);
+  document.getElementById("leaderboard").innerHTML=sorted.map((item,i)=>{
+    const user=USERS[item.u];
+    const pct=Math.round((item.count/maxCount)*100);
+    const isTied=i>0&&item.count===sorted[i-1].count;
+    return`<div style="display:flex;align-items:center;gap:10px;margin-bottom:10px">
+      <div style="font-size:20px;width:28px;text-align:center">${isTied?medals[i-1]:medals[i]}</div>
+      <div style="font-size:20px">${user.emoji}</div>
+      <div style="flex:1">
+        <div style="display:flex;justify-content:space-between;margin-bottom:4px">
+          <span style="font-family:'Bebas Neue',sans-serif;font-size:15px;letter-spacing:1px;color:${user.color}">${user.name}</span>
+          <span style="font-family:'Bebas Neue',sans-serif;font-size:15px;color:${user.color}">${item.count} sessions</span>
+        </div>
+        <div style="height:6px;background:var(--surface);border-radius:4px;overflow:hidden">
+          <div style="height:100%;width:${pct}%;background:linear-gradient(90deg,${user.color},${user.accent});border-radius:4px;transition:width 0.6s ease"></div>
+        </div>
+      </div>
+    </div>`;
+  }).join("")+`<div style="font-size:10px;color:var(--muted);text-align:center;margin-top:6px;letter-spacing:1px;text-transform:uppercase">resets 1st of every month 🗓️</div>`;
 
   // today
-  ["rena","wanjun"].forEach(u=>{
+  Object.keys(USERS).forEach(u=>{
+    const user=USERS[u];
     const todayList=checkins.filter(x=>x.user_key===u&&x.day===today);
     const el=document.getElementById(`today-checkins-${u}`);
     if(!todayList.length){
-      el.innerHTML=`<div style="text-align:center;font-size:11px;color:var(--muted);padding:6px 0;text-transform:uppercase;letter-spacing:1px">no sessions yet</div>`;
+      el.innerHTML=`<div style="text-align:center;font-size:10px;color:var(--muted);padding:4px 0;text-transform:uppercase;letter-spacing:1px">no sessions yet</div>`;
     } else {
       el.innerHTML=todayList.map(x=>`
-        <div style="display:flex;align-items:center;justify-content:space-between;background:var(--surface);border-radius:10px;padding:8px 10px;margin-bottom:6px;border-left:3px solid ${x.type==="class"?"var(--class)":"var(--gym)"}">
-          <span style="font-size:12px;font-weight:600;color:${x.type==="class"?"var(--class)":"var(--gym)"}">${x.type==="class"?"🧘‍♀️ CLASS":"💪 GYM"}</span>
-          <button onclick="removeEntry('${x.id}')" style="background:none;border:none;color:var(--muted);font-size:16px;cursor:pointer;line-height:1;padding:0 2px">×</button>
+        <div style="display:flex;align-items:center;justify-content:space-between;background:var(--surface);border-radius:8px;padding:6px 8px;margin-bottom:5px;border-left:3px solid ${x.type==="class"?"var(--class)":"var(--gym)"}">
+          <span style="font-size:11px;font-weight:600;color:${x.type==="class"?"var(--class)":"var(--gym)"}">${x.type==="class"?"🧘‍♀️":"💪"}</span>
+          <button onclick="removeEntry('${x.id}')" style="background:none;border:none;color:var(--muted);font-size:14px;cursor:pointer;line-height:1;padding:0">×</button>
         </div>`).join("");
     }
   });
 
-  // both fire banner
-  const renaTodayCount=checkins.filter(x=>x.user_key==="rena"&&x.day===today).length;
-  const wanjunTodayCount=checkins.filter(x=>x.user_key==="wanjun"&&x.day===today).length;
-  document.getElementById("both-fire").style.display=(renaTodayCount>0&&wanjunTodayCount>0)?"block":"none";
+  // all fire banner
+  const allToday=Object.keys(USERS).every(u=>checkins.some(x=>x.user_key===u&&x.day===today));
+  document.getElementById("all-fire").style.display=allToday?"block":"none";
 
   // week
-  ["rena","wanjun"].forEach(u=>{
-    const color=u==="rena"?"var(--hot)":"#C2619F";
-    const accent=u==="rena"?"var(--hot2)":"#DBA8D8";
+  Object.keys(USERS).forEach(u=>{
+    const user=USERS[u];
     const wkTotal=weekDays.reduce((s,d)=>s+checkins.filter(x=>x.user_key===u&&x.day===d).length,0);
     document.getElementById(`week-${u}`).innerHTML=`
-      <div style="display:flex;align-items:center;gap:8px;margin-bottom:16px">
-        <span style="font-size:22px">${u==="rena"?"🌸":"🌷"}</span>
-        <span style="font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:1px;color:${color}">${u==="rena"?"RENA":"WANJUN"}</span>
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:14px">
+        <span style="font-size:20px">${user.emoji}</span>
+        <span style="font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:1px;color:${user.color}">${user.name}</span>
         <span style="margin-left:auto;font-size:11px;color:var(--muted);font-weight:600">${wkTotal} THIS WEEK</span>
       </div>
-      <div style="display:flex;gap:6px">
+      <div style="display:flex;gap:5px">
         ${weekDays.map(day=>{
           const dayC=checkins.filter(x=>x.user_key===u&&x.day===day);
           const isToday=day===today;
@@ -458,33 +433,35 @@ function renderAll(){
           const hasClass=dayC.some(x=>x.type==="class");
           const dow=new Date(day+"T12:00:00").getDay();
           return`<div style="flex:1;text-align:center">
-            <div style="width:100%;aspect-ratio:1;border-radius:10px;background:${total>0?`linear-gradient(135deg,${color},${accent})`:isToday?"rgba(255,45,107,0.12)":"var(--surface)"};border:${isToday&&!total?`1px solid ${color}`:"1px solid transparent"};display:flex;flex-direction:column;align-items:center;justify-content:center;box-shadow:${total>0?`0 2px 12px rgba(255,45,107,0.3)`:"none"};transition:all 0.3s">
-              ${total>0?`<div style="font-size:${total>1?"9":"12"}px;line-height:1">${hasClass?"🧘‍♀️":"💪"}</div><div style="font-family:'Bebas Neue',sans-serif;font-size:14px;color:#fff;margin-top:1px">${total}</div>`:isToday?`<div style="width:4px;height:4px;border-radius:50%;background:${color}"></div>`:""}
+            <div style="width:100%;aspect-ratio:1;border-radius:8px;background:${total>0?`linear-gradient(135deg,${user.color},${user.accent})`:isToday?"rgba(255,45,107,0.1)":"var(--surface)"};border:${isToday&&!total?`1px solid ${user.color}`:"1px solid transparent"};display:flex;flex-direction:column;align-items:center;justify-content:center;box-shadow:${total>0?`0 2px 10px ${user.color}40`:"none"}">
+              ${total>0?`<div style="font-size:10px">${hasClass?"🧘‍♀️":"💪"}</div><div style="font-family:'Bebas Neue',sans-serif;font-size:13px;color:#fff">${total}</div>`:isToday?`<div style="width:4px;height:4px;border-radius:50%;background:${user.color}"></div>`:""}
             </div>
-            <div style="font-size:8px;color:var(--muted);margin-top:4px;font-weight:600;letter-spacing:1px">${DAY_LABELS[dow]}</div>
+            <div style="font-size:7px;color:var(--muted);margin-top:3px;font-weight:600;letter-spacing:1px">${DAY_LABELS[dow]}</div>
           </div>`;
         }).join("")}
       </div>`;
   });
 
+  // year
+  renderYear();
+
   // history
   const histEl=document.getElementById("history-list");
   if(!checkins.length){histEl.innerHTML=`<div style="text-align:center;color:var(--muted);padding:40px;font-style:italic">no sessions yet — go crush it! 💪</div>`;return;}
   const byDay={};
-  checkins.slice(0,40).forEach(x=>{if(!byDay[x.day])byDay[x.day]=[];byDay[x.day].push(x);});
+  checkins.slice(0,50).forEach(x=>{if(!byDay[x.day])byDay[x.day]=[];byDay[x.day].push(x);});
   histEl.innerHTML=Object.entries(byDay).map(([day,items])=>{
     const d=new Date(day+"T12:00:00");
     const label=day===today?"TODAY":d.toLocaleDateString("en-SG",{weekday:"short",month:"short",day:"numeric"}).toUpperCase();
     return`<div style="margin-bottom:18px">
       <div style="font-size:10px;color:var(--muted);letter-spacing:2px;font-weight:600;margin-bottom:8px;padding-left:4px">${label}</div>
       ${items.map(x=>{
-        const isRena=x.user_key==="rena";
-        const col=isRena?"var(--hot)":"#C2619F";
+        const user=USERS[x.user_key]||USERS.rena;
         const typeCol=x.type==="class"?"var(--class)":"var(--gym)";
         return`<div class="card" style="display:flex;align-items:center;gap:12px;padding:12px 16px;margin-bottom:8px;border-left:3px solid ${typeCol}">
-          <span style="font-size:22px">${isRena?"🌸":"🌷"}</span>
+          <span style="font-size:22px">${user.emoji}</span>
           <div style="flex:1">
-            <div style="font-family:'Bebas Neue',sans-serif;font-size:16px;letter-spacing:1px;color:${col}">${isRena?"RENA":"WANJUN"}</div>
+            <div style="font-family:'Bebas Neue',sans-serif;font-size:16px;letter-spacing:1px;color:${user.color}">${user.name}</div>
             <div style="font-size:11px;color:var(--muted)">${x.type==="class"?"🧘‍♀️ class session":"💪 gym session"}</div>
           </div>
           <button onclick="removeEntry('${x.id}')" style="background:var(--surface);border:none;color:var(--muted);font-size:11px;cursor:pointer;padding:6px 10px;border-radius:8px;font-family:'DM Sans',sans-serif;font-weight:600">remove</button>
@@ -492,9 +469,6 @@ function renderAll(){
       }).join("")}
     </div>`;
   }).join("");
-
-  // year
-  renderYear();
 }
 
 function renderYear(){
@@ -502,28 +476,21 @@ function renderYear(){
   const year=now.getFullYear();
   const today=getToday();
 
-  ["rena","wanjun"].forEach(u=>{
-    const color=u==="rena"?"#FF2D6B":"#C2619F";
-    const accent=u==="rena"?"#FF6B9D":"#DBA8D8";
+  Object.keys(USERS).forEach(u=>{
+    const user=USERS[u];
     const userCheckins=checkins.filter(x=>x.user_key===u&&x.day.startsWith(year));
     const totalYear=userCheckins.length;
     const classYear=userCheckins.filter(x=>x.type==="class").length;
     const gymYear=userCheckins.filter(x=>x.type==="gym").length;
-
-    // build a map of day -> count
     const dayMap={};
     userCheckins.forEach(x=>{dayMap[x.day]=(dayMap[x.day]||0)+1;});
     const maxCount=Math.max(...Object.values(dayMap),1);
 
-    // build 12 months grid
     let gridHTML="";
     for(let m=0;m<12;m++){
-      const monthDate=new Date(year,m,1);
       const monthKey=`${year}-${String(m+1).padStart(2,"0")}`;
       const daysInMonth=new Date(year,m+1,0).getDate();
       const monthTotal=userCheckins.filter(x=>x.day.startsWith(monthKey)).length;
-      const monthName=MONTH_NAMES[m].slice(0,3).toUpperCase();
-
       let dotsHTML="";
       for(let d=1;d<=daysInMonth;d++){
         const dayStr=`${monthKey}-${String(d).padStart(2,"0")}`;
@@ -531,71 +498,70 @@ function renderYear(){
         const isToday=dayStr===today;
         const intensity=count===0?0:Math.min(count/maxCount,1);
         const bg=count===0
-          ?(isToday?`border:1.5px solid ${color};background:transparent`:`background:var(--surface)`)
-          :`background:${color};opacity:${0.3+intensity*0.7}`;
-        dotsHTML+=`<div style="width:10px;height:10px;border-radius:3px;${bg};${count>0?`box-shadow:0 1px 4px ${color}66`:""}" title="${dayStr}: ${count} session${count!==1?'s':''}"></div>`;
+          ?(isToday?`border:1.5px solid ${user.color};background:transparent`:`background:var(--surface)`)
+          :`background:${user.color};opacity:${0.3+intensity*0.7}`;
+        dotsHTML+=`<div style="width:9px;height:9px;border-radius:2px;${bg}" title="${dayStr}: ${count}"></div>`;
       }
-
-      gridHTML+=`
-        <div style="margin-bottom:14px">
-          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px">
-            <span style="font-size:10px;font-weight:700;color:var(--muted);letter-spacing:2px">${monthName}</span>
-            <span style="font-family:'Bebas Neue',sans-serif;font-size:14px;color:${monthTotal>0?color:"var(--muted)"};">${monthTotal}</span>
-          </div>
-          <div style="display:flex;flex-wrap:wrap;gap:3px">${dotsHTML}</div>
-        </div>`;
+      gridHTML+=`<div style="margin-bottom:12px">
+        <div style="display:flex;justify-content:space-between;margin-bottom:4px">
+          <span style="font-size:9px;font-weight:700;color:var(--muted);letter-spacing:2px">${MONTH_NAMES[m].slice(0,3).toUpperCase()}</span>
+          <span style="font-family:'Bebas Neue',sans-serif;font-size:13px;color:${monthTotal>0?user.color:"var(--muted)"}">${monthTotal}</span>
+        </div>
+        <div style="display:flex;flex-wrap:wrap;gap:2px">${dotsHTML}</div>
+      </div>`;
     }
 
     document.getElementById(`year-${u}`).innerHTML=`
-      <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px">
-        <span style="font-size:22px">${u==="rena"?"🌸":"🌷"}</span>
-        <span style="font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:1px;color:${color}">${u==="rena"?"RENA":"WANJUN"}</span>
-        <span style="margin-left:auto;font-family:'Bebas Neue',sans-serif;font-size:28px;color:${color}">${totalYear}</span>
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px">
+        <span style="font-size:22px">${user.emoji}</span>
+        <span style="font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:1px;color:${user.color}">${user.name}</span>
+        <span style="margin-left:auto;font-family:'Bebas Neue',sans-serif;font-size:28px;color:${user.color}">${totalYear}</span>
       </div>
-      <div style="font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:2px;margin-bottom:16px">${year} · ${classYear} classes · ${gymYear} gym</div>
+      <div style="font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:2px;margin-bottom:14px">${year} · ${classYear} classes · ${gymYear} gym</div>
       ${gridHTML}
-      <div style="display:flex;align-items:center;gap:6px;margin-top:4px">
-        <span style="font-size:10px;color:var(--muted)">less</span>
-        ${[0.15,0.35,0.55,0.75,1].map(o=>`<div style="width:10px;height:10px;border-radius:3px;background:${color};opacity:${o}"></div>`).join("")}
-        <span style="font-size:10px;color:var(--muted)">more</span>
+      <div style="display:flex;align-items:center;gap:5px;margin-top:4px">
+        <span style="font-size:9px;color:var(--muted)">less</span>
+        ${[0.15,0.35,0.55,0.75,1].map(o=>`<div style="width:9px;height:9px;border-radius:2px;background:${user.color};opacity:${o}"></div>`).join("")}
+        <span style="font-size:9px;color:var(--muted)">more</span>
       </div>`;
   });
 
-  // monthly breakdown bar chart
+  // monthly breakdown
   const breakdownEl=document.getElementById("monthly-breakdown");
-  const maxMonthTotal=Math.max(...Array.from({length:12},(_,m)=>{
-    const mk=`${year}-${String(m+1).padStart(2,"0")}`;
+  const year2=now.getFullYear();
+  const maxM=Math.max(...Array.from({length:12},(_,m)=>{
+    const mk=`${year2}-${String(m+1).padStart(2,"0")}`;
     return checkins.filter(x=>x.day.startsWith(mk)).length;
   }),1);
 
   breakdownEl.innerHTML=Array.from({length:12},(_,m)=>{
-    const mk=`${year}-${String(m+1).padStart(2,"0")}`;
-    const renaC=checkins.filter(x=>x.user_key==="rena"&&x.day.startsWith(mk)).length;
-    const wanjunC=checkins.filter(x=>x.user_key==="wanjun"&&x.day.startsWith(mk)).length;
-    const total=renaC+wanjunC;
-    const pct=Math.round((total/maxMonthTotal)*100);
+    const mk=`${year2}-${String(m+1).padStart(2,"0")}`;
+    const rC=checkins.filter(x=>x.user_key==="rena"&&x.day.startsWith(mk)).length;
+    const wC=checkins.filter(x=>x.user_key==="wanjun"&&x.day.startsWith(mk)).length;
+    const zC=checkins.filter(x=>x.user_key==="zhenling"&&x.day.startsWith(mk)).length;
+    const total=rC+wC+zC;
     const isCurrent=mk===getMonthPrefix();
-    return`<div style="display:flex;align-items:center;gap:10px;margin-bottom:10px">
-      <div style="font-size:10px;color:var(--muted);font-weight:700;letter-spacing:1px;width:28px;flex-shrink:0">${MONTH_NAMES[m].slice(0,3).toUpperCase()}</div>
-      <div style="flex:1;height:20px;background:var(--surface);border-radius:6px;overflow:hidden;position:relative">
-        <div style="position:absolute;left:0;top:0;height:100%;width:${(renaC/maxMonthTotal)*100}%;background:linear-gradient(90deg,#FF2D6B,#FF6B9D);transition:width 0.6s ease"></div>
-        <div style="position:absolute;left:${(renaC/maxMonthTotal)*100}%;top:0;height:100%;width:${(wanjunC/maxMonthTotal)*100}%;background:linear-gradient(90deg,#C2619F,#DBA8D8);transition:width 0.6s ease"></div>
-        ${isCurrent?`<div style="position:absolute;inset:0;border:1.5px solid #FF2D6B;border-radius:6px;pointer-events:none"></div>`:""}
+    return`<div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">
+      <div style="font-size:9px;color:var(--muted);font-weight:700;letter-spacing:1px;width:24px;flex-shrink:0">${MONTH_NAMES[m].slice(0,3).toUpperCase()}</div>
+      <div style="flex:1;height:18px;background:var(--surface);border-radius:5px;overflow:hidden;position:relative;border:${isCurrent?"1.5px solid #FF2D6B":"none"}">
+        <div style="position:absolute;left:0;top:0;height:100%;width:${(rC/maxM)*100}%;background:linear-gradient(90deg,#FF2D6B,#FF6B9D)"></div>
+        <div style="position:absolute;left:${(rC/maxM)*100}%;top:0;height:100%;width:${(wC/maxM)*100}%;background:linear-gradient(90deg,#C2619F,#DBA8D8)"></div>
+        <div style="position:absolute;left:${((rC+wC)/maxM)*100}%;top:0;height:100%;width:${(zC/maxM)*100}%;background:linear-gradient(90deg,#7B5EA7,#B39DDB)"></div>
       </div>
-      <div style="font-family:'Bebas Neue',sans-serif;font-size:14px;color:${total>0?"#2D0A1A":"var(--muted)"};width:20px;text-align:right;flex-shrink:0">${total||""}</div>
+      <div style="font-family:'Bebas Neue',sans-serif;font-size:13px;color:${total>0?"#2D0A1A":"var(--muted)"};width:18px;text-align:right;flex-shrink:0">${total||""}</div>
     </div>`;
   }).join("")+`
-    <div style="display:flex;gap:16px;margin-top:12px">
-      <div style="display:flex;align-items:center;gap:5px"><div style="width:10px;height:10px;border-radius:3px;background:#FF2D6B"></div><span style="font-size:11px;color:var(--muted)">Rena</span></div>
-      <div style="display:flex;align-items:center;gap:5px"><div style="width:10px;height:10px;border-radius:3px;background:#C2619F"></div><span style="font-size:11px;color:var(--muted)">Wanjun</span></div>
+    <div style="display:flex;gap:14px;margin-top:10px;flex-wrap:wrap">
+      <div style="display:flex;align-items:center;gap:4px"><div style="width:9px;height:9px;border-radius:2px;background:#FF2D6B"></div><span style="font-size:11px;color:var(--muted)">Rena</span></div>
+      <div style="display:flex;align-items:center;gap:4px"><div style="width:9px;height:9px;border-radius:2px;background:#C2619F"></div><span style="font-size:11px;color:var(--muted)">Wanjun</span></div>
+      <div style="display:flex;align-items:center;gap:4px"><div style="width:9px;height:9px;border-radius:2px;background:#7B5EA7"></div><span style="font-size:11px;color:var(--muted)">Zhenling</span></div>
     </div>`;
 }
 
 function setTab(t){
   ["today","week","year","history"].forEach(x=>{
     document.getElementById(`view-${x}`).style.display=x===t?"block":"none";
-    const btn=document.getElementById(`tab-${x}`);
-    btn.className=x===t?"tab-btn active":"tab-btn inactive";
+    document.getElementById(`tab-${x}`).className=x===t?"tab-btn active":"tab-btn inactive";
   });
 }
 
