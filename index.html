@@ -111,12 +111,20 @@
   <div style="width:100%;max-width:480px;background:linear-gradient(160deg,var(--card),var(--card2));border-radius:28px 28px 0 0;padding:28px 24px 48px;animation:slideUp 0.35s cubic-bezier(0.34,1.56,0.64,1);border-top:1px solid rgba(247,201,72,0.25);box-shadow:0 -8px 40px rgba(232,132,122,0.25)">
     <div class="diamond-bg"></div>
     <div style="width:40px;height:4px;background:var(--surface);border-radius:4px;margin:0 auto 22px;position:relative;z-index:1"></div>
-    <div style="text-align:center;margin-bottom:20px;position:relative;z-index:1">
+    <div style="text-align:center;margin-bottom:16px;position:relative;z-index:1">
       <div id="modal-svg" style="animation:float 2s ease infinite;display:inline-block"></div>
       <div style="font-family:'Bebas Neue',sans-serif;font-size:26px;letter-spacing:3px;margin-top:6px" id="modal-name"></div>
-      <div style="color:var(--muted);font-size:13px;margin-top:3px">you showed up! 🌸 add a note?</div>
+      <div style="color:var(--muted);font-size:13px;margin-top:3px">you showed up! 🌸</div>
     </div>
-    <textarea id="session-note" rows="3" placeholder="e.g. leg day done! 💪  /  morning run 🏃‍♀️  /  just showed up ✨ (optional)" style="position:relative;z-index:1"></textarea>
+    <!-- Location picker - only shown for Rena & Wanjun -->
+    <div id="location-picker" style="display:none;margin-bottom:16px;position:relative;z-index:1">
+      <div style="font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:2px;margin-bottom:8px;text-align:center">where did you work out?</div>
+      <div style="display:flex;gap:10px">
+        <button id="loc-amore" onclick="selectLocation('amore')" style="flex:1;padding:14px 0;border-radius:14px;border:2px solid rgba(232,132,122,0.4);background:rgba(232,132,122,0.1);color:var(--rose);font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:2px;cursor:pointer;transition:all 0.2s">🏋️ AMORE</button>
+        <button id="loc-others" onclick="selectLocation('others')" style="flex:1;padding:14px 0;border-radius:14px;border:2px solid rgba(247,201,72,0.3);background:rgba(247,201,72,0.08);color:var(--gold);font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:2px;cursor:pointer;transition:all 0.2s">🌿 OTHERS</button>
+      </div>
+    </div>
+    <textarea id="session-note" rows="2" placeholder="add a note? e.g. leg day done! 💪 (optional)" style="position:relative;z-index:1"></textarea>
     <button onclick="confirmCheckin()" class="fire-btn" style="width:100%;padding:18px 0;border-radius:18px;background:linear-gradient(135deg,var(--rose),var(--peach),var(--gold));color:#fff;font-size:22px;margin-top:14px;box-shadow:0 6px 30px rgba(232,132,122,0.5);position:relative;z-index:1">LOG IT! ✦</button>
     <button onclick="closeModal()" style="width:100%;padding:12px 0;background:transparent;border:none;color:var(--muted);font-size:13px;cursor:pointer;margin-top:6px;font-family:'DM Sans',sans-serif;position:relative;z-index:1">maybe later</button>
   </div>
@@ -176,6 +184,7 @@
           <div style="font-family:'Bebas Neue',sans-serif;font-size:14px;letter-spacing:2px;color:var(--rose);text-align:center">RENA</div>
           <div id="monthly-count-rena" style="font-family:'Bebas Neue',sans-serif;font-size:52px;line-height:1;color:var(--rose);text-align:center;text-shadow:0 0 20px rgba(232,132,122,0.6)">0</div>
           <div style="font-size:8px;color:var(--muted);text-transform:uppercase;letter-spacing:2px;text-align:center;margin-top:2px">sessions</div>
+          <div id="location-break-rena" style="font-size:9px;text-align:center;margin-top:6px;line-height:1.6"></div>
         </div>
       </div>
 
@@ -188,6 +197,7 @@
           <div style="font-family:'Bebas Neue',sans-serif;font-size:14px;letter-spacing:2px;color:var(--lilac);text-align:center">WANJUN</div>
           <div id="monthly-count-wanjun" style="font-family:'Bebas Neue',sans-serif;font-size:52px;line-height:1;color:var(--lilac);text-align:center;text-shadow:0 0 20px rgba(201,169,221,0.6)">0</div>
           <div style="font-size:8px;color:var(--muted);text-transform:uppercase;letter-spacing:2px;text-align:center;margin-top:2px">sessions</div>
+          <div id="location-break-wanjun" style="font-size:9px;text-align:center;margin-top:6px;line-height:1.6"></div>
         </div>
       </div>
 
@@ -325,6 +335,7 @@ const GIRL_SVGS={
 
 let checkins=[];
 let activeUser=null;
+let selectedLocation='amore';
 
 function getToday(){return new Date().toISOString().slice(0,10)}
 function getMonthPrefix(){const n=new Date();return`${n.getFullYear()}-${String(n.getMonth()+1).padStart(2,"0")}`}
@@ -332,7 +343,7 @@ function getWeekDays(){const d=[],t=new Date();for(let i=6;i>=0;i--){const x=new
 
 async function loadCheckins(){
   try{
-    const r=await fetch(`${SB_URL}/rest/v1/checkins?select=id,user_key,day,note,checked_at&order=checked_at.desc`,{headers:HDR});
+    const r=await fetch(`${SB_URL}/rest/v1/checkins?select=id,user_key,day,note,location,checked_at&order=checked_at.desc`,{headers:HDR});
     checkins=await r.json();
     document.getElementById("sync-dot").style.cssText="width:6px;height:6px;border-radius:50%;background:#7ECAC3;box-shadow:0 0 8px #7ECAC3";
     document.getElementById("sync-label").textContent="live ✦";
@@ -343,8 +354,8 @@ async function loadCheckins(){
   renderAll();
 }
 
-async function insertCheckin(user_key,day,note){
-  await fetch(`${SB_URL}/rest/v1/checkins`,{method:"POST",headers:{...HDR,Prefer:"return=minimal"},body:JSON.stringify({user_key,day,note:note||null,checked_at:Date.now()})});
+async function insertCheckin(user_key,day,note,location){
+  await fetch(`${SB_URL}/rest/v1/checkins`,{method:"POST",headers:{...HDR,Prefer:"return=minimal"},body:JSON.stringify({user_key,day,note:note||null,location:location||null,checked_at:Date.now()})});
 }
 async function deleteCheckin(id){
   await fetch(`${SB_URL}/rest/v1/checkins?id=eq.${id}`,{method:"DELETE",headers:HDR});
@@ -361,7 +372,7 @@ function spawnSparks(){
   }
 }
 
-function showBurst(u,note){
+function showBurst(u,note,loc){
   const user=USERS[u];
   const ov=document.getElementById("burst-overlay");
   document.getElementById("burst-svg").innerHTML=GIRL_SVGS[u];
@@ -370,6 +381,11 @@ function showBurst(u,note){
   const month=getMonthPrefix();
   const monthCount=checkins.filter(c=>c.user_key===u&&c.day.startsWith(month)).length;
   document.getElementById("burst-note-display").textContent=note?`"${note}"`:"";
+  if(loc){
+    const locLabel=document.getElementById("burst-count-label");
+    const locTag=loc==="amore"?"🏋️ Amore":"🌿 Others";
+    document.getElementById("burst-count-label").textContent=`${locTag} · ${checkins.filter(c=>c.user_key===u&&c.day.startsWith(month)).length} sessions this month ✦`;
+  }
   document.getElementById("burst-count-label").textContent=`${monthCount} sessions this month ✦`;
   ov.style.display="flex";
   ov.style.animation="popIn 0.3s ease";
@@ -378,13 +394,40 @@ function showBurst(u,note){
 
 function openModal(u){
   activeUser=u;
+  selectedLocation='amore';
   const user=USERS[u];
   document.getElementById("modal-svg").innerHTML=GIRL_SVGS[u];
   document.getElementById("modal-name").style.color=user.color;
   document.getElementById("modal-name").textContent=user.name;
   document.getElementById("session-note").value="";
+  // show location picker only for Rena and Wanjun
+  const picker=document.getElementById("location-picker");
+  picker.style.display=(u==="rena"||u==="wanjun")?"block":"none";
+  selectLocation('amore');
   document.getElementById("checkin-modal").style.display="flex";
   setTimeout(()=>document.getElementById("session-note").focus(),400);
+}
+
+function selectLocation(loc){
+  selectedLocation=loc;
+  const amoreBtn=document.getElementById("loc-amore");
+  const othersBtn=document.getElementById("loc-others");
+  if(!amoreBtn)return;
+  if(loc==="amore"){
+    amoreBtn.style.background="linear-gradient(135deg,var(--rose),var(--peach))";
+    amoreBtn.style.color="#fff";
+    amoreBtn.style.borderColor="transparent";
+    othersBtn.style.background="rgba(247,201,72,0.08)";
+    othersBtn.style.color="var(--gold)";
+    othersBtn.style.borderColor="rgba(247,201,72,0.3)";
+  } else {
+    othersBtn.style.background="linear-gradient(135deg,var(--gold),var(--peach))";
+    othersBtn.style.color="#fff";
+    othersBtn.style.borderColor="transparent";
+    amoreBtn.style.background="rgba(232,132,122,0.1)";
+    amoreBtn.style.color="var(--rose)";
+    amoreBtn.style.borderColor="rgba(232,132,122,0.4)";
+  }
 }
 function closeModal(){document.getElementById("checkin-modal").style.display="none";activeUser=null;}
 
@@ -392,12 +435,13 @@ async function confirmCheckin(){
   if(!activeUser)return;
   const u=activeUser;
   const note=document.getElementById("session-note").value.trim();
+  const loc=(u==="rena"||u==="wanjun")?selectedLocation:null;
   closeModal();
-  checkins.unshift({id:"tmp-"+Date.now(),user_key:u,day:getToday(),note:note||null,checked_at:Date.now()});
+  checkins.unshift({id:"tmp-"+Date.now(),user_key:u,day:getToday(),note:note||null,location:loc,checked_at:Date.now()});
   renderAll();
   spawnSparks();
-  showBurst(u,note);
-  await insertCheckin(u,getToday(),note);
+  showBurst(u,note,loc);
+  await insertCheckin(u,getToday(),note,loc);
   await loadCheckins();
 }
 
@@ -420,6 +464,13 @@ function renderAll(){
     const m=checkins.filter(x=>x.user_key===u&&x.day.startsWith(month));
     totals[u]=m.length;
     document.getElementById(`monthly-count-${u}`).textContent=m.length;
+    // show breakdown for Rena & Wanjun
+    if(u==="rena"||u==="wanjun"){
+      const amoreC=m.filter(x=>x.location==="amore").length;
+      const othersC=m.filter(x=>x.location==="others"||!x.location).length;
+      const breakEl=document.getElementById(`location-break-${u}`);
+      if(breakEl) breakEl.innerHTML=`<span style="color:var(--rose)">🏋️ ${amoreC} Amore</span> <span style="color:var(--gold)">· 🌿 ${othersC} Others</span>`;
+    }
   });
 
   // leaderboard
@@ -458,7 +509,8 @@ function renderAll(){
             <span style="font-size:10px;font-weight:700;color:${user.color};letter-spacing:1px">session ${i+1} ✦</span>
             <button onclick="removeEntry('${x.id}')" style="background:none;border:none;color:var(--muted);font-size:13px;cursor:pointer;line-height:1;padding:0">×</button>
           </div>
-          ${x.note?`<div style="font-size:10px;color:var(--lilac);margin-top:2px;font-style:italic">"${x.note}"</div>`:""}
+          ${(x.location&&(u==="rena"||u==="wanjun"))?`<div style="font-size:9px;color:${x.location==="amore"?"var(--rose)":"var(--gold)"};margin-top:1px;font-weight:600">${x.location==="amore"?"🏋️ Amore":"🌿 Others"}</div>`:""}
+          ${x.note?`<div style="font-size:10px;color:var(--lilac);margin-top:1px;font-style:italic">"${x.note}"</div>`:""}
         </div>`).join("");
     }
   });
@@ -511,6 +563,7 @@ function renderAll(){
           <div style="flex-shrink:0">${GIRL_SVGS[x.user_key]}</div>
           <div style="flex:1;position:relative;z-index:1">
             <div style="font-family:'Bebas Neue',sans-serif;font-size:14px;letter-spacing:2px;color:${user.color}">${user.name}</div>
+            ${(x.location&&(x.user_key==="rena"||x.user_key==="wanjun"))?`<div style="font-size:10px;color:${x.location==="amore"?"var(--rose)":"var(--gold)"};font-weight:600;margin-bottom:1px">${x.location==="amore"?"🏋️ Amore":"🌿 Others"}</div>`:""}
             ${x.note?`<div style="font-size:12px;color:var(--lilac);margin-top:1px;font-style:italic">"${x.note}"</div>`:`<div style="font-size:10px;color:var(--muted);letter-spacing:1px">SESSION LOGGED ✦</div>`}
           </div>
           <button onclick="removeEntry('${x.id}')" style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);color:var(--muted);font-size:10px;cursor:pointer;padding:5px 8px;border-radius:7px;font-family:'DM Sans',sans-serif;font-weight:600;flex-shrink:0;position:relative;z-index:1">remove</button>
